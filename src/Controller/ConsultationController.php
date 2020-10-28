@@ -20,8 +20,7 @@ class ConsultationController extends AbstractController
      */
     public function getConsultation(PatientRepository $patientrepos, ConsultationRepository $consultationrepos)
     {
-        $consultation = $consultationrepos->findBy(["patient"=>$patient]);
-        dd($consultation);
+        //$consultation = $consultationrepos->findBy(["patient"=>$id]);
         return $this->render('consultation/index.html.twig', [
             'controller_name' => 'ConsultationController',
         ]);

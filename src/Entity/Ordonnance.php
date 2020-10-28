@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\OrdonnanceRepository;
+use Webmozart\Assert\Assert;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\OrdonnanceRepository;
 
 /**
  * @ORM\Entity(repositoryClass=OrdonnanceRepository::class)
@@ -19,11 +20,15 @@ class Ordonnance
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Mentiens can't be null")
+     * 
      */
     private $mentions;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message = "Details can't be null")
+     * 
      */
     private $details;
 

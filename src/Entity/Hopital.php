@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\HopitalRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\HopitalRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=HopitalRepository::class)
@@ -21,41 +24,55 @@ class Hopital
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Nom can't be null")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Adresse can't be null")
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message = "Contact can't be null")
      */
     private $contact;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Email can't be null")
+     * @Assert\Email(
+     *  message = "Email '{{ value }}' is not valid!."
+     *)
      */
     private $email;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message = "Boite Postal can't be null")
+     * 
      */
     private $boitePostal;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Fax can't be null")
+     * 
      */
     private $fax;
 
     /**
      * @ORM\Column(type="blob")
+     * @Assert\NotBlank(message = "Logo can't be null")
+     * 
      */
     private $logo;
 
     /**
      * @ORM\Column(type="boolean")
+     * 
      */
     private $statut;
 

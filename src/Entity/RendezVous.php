@@ -19,21 +19,29 @@ class RendezVous
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Libelle can't be null")
+     * 
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(message = "Date can't be null")
+     * 
      */
     private $date;
 
     /**
      * @ORM\Column(type="time")
+     * @Assert\NotBlank(message = "Heure can't be null")
+     * 
      */
     private $heure;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message = "Message can't be null")
+     * 
      */
     private $message;
 

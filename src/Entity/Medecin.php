@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\MedecinRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MedecinRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=MedecinRepository::class)
@@ -21,11 +23,15 @@ class Medecin extends User
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Specialité can't be null")
+     * 
      */
     protected $specialite;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank(message = "Biographie can't be null")
+     * 
      */
     private $biographie;
 

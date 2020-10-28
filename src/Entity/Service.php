@@ -21,6 +21,8 @@ class Service
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Service can't be null")
+     * 
      */
     private $nom;
 
@@ -31,6 +33,8 @@ class Service
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message = "Description can't be null")
+     * 
      */
     private $description;
 

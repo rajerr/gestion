@@ -1,36 +1,48 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion!{% endblock %}
 
 {% block body %}
 <form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername">Username</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
+<div class="main-wrapper account-wrapper bg-info" >
+    <div class="account-page ">
+        <div class="account-center">
+            <div class="account-box border border-info mt-5">
+                <form action="" class="form-signin">
+                    <div class="account-logo">
+                        <a href=""><img src="{{asset('img/logo-dark.png')}}" alt=""></a>
+                    </div>
+                    <label for="inputUsername">Username</label>
+                    <div class="form-group border border-info">
+                        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
+                    </div>
+                    <label for="inputPassword">Password</label>
+                    <div class="form-group border border-info">
+                        <input type="password" name="password" id="inputPassword" class="form-control" required>
+                        <input type="hidden" name="_csrf_token"
+                                value="{{ csrf_token('authenticate') }}"
+                            >
+                    </div>
+                     <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Remember me
+                        </label>
+                    </div>
+                    <div class="form-group text-right">
+                        <a href="#">Password oublié??</a>
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary account-btn">Connexion</button>
+                    </div>
+                     <div class="form-group text-center">
+                    <label for="">Pas de Compte????</label><br>
+                        <a class="btn btn-primary account-btn" href="{{path('user_patient_create')}}">Créer un</a>
+                    </div>
+                 {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+            </div>
         </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+    </div>
+</div>
 </form>
 {% endblock %}

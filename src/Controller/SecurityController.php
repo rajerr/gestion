@@ -72,6 +72,14 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        try{
+            $this->get('security.context')->setToken(null);
+            $this->get('request')->getSession()->invalidate();
+            return true;
+        }catch (Exception $e){
+            return false;
+            throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+       
+        } 
     }
 }

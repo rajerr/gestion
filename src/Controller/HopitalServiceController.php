@@ -17,13 +17,14 @@ class HopitalServiceController extends AbstractController
     /**
      * @Route("/hopitalservice/index", name="hopital_service_index")
      * methods={"GET"},
+     * "security"="is_granted('ROLE_ADMIN') or is_granted('ROLE_SOUSADMIN')",
+     * "security_message"="vous n'avez pas le droit pour faire cette action.",
      * 
      */
     public function getHopitalToService(HopitalServiceRepository $repos)
     {
 
         $service = $repos->findAll();
-        dd($service);
         return $this->render('hopital_service/index.html.twig', [
             'controller_name' => 'HopitalServiceController',
         ]);
@@ -33,6 +34,9 @@ class HopitalServiceController extends AbstractController
 
     /**
      * @Route("/hopitalservice/create", name="hopital_service_create")
+     * "security"="is_granted('ROLE_ADMIN') or is_granted('ROLE_SOUSADMIN')",
+     * "security_message"="vous n'avez pas le droit pour faire cette action.",
+     * 
      */
     public function createHopitalToService(Request $request,SerializerInterface $serializer, ValidatorInterface $validator, EntityManagerInterface $manager)
     {

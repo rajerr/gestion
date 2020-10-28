@@ -19,21 +19,29 @@ class Suivi
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Libelle can't be null")
+     * 
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(message = "Date Prise can't be null")
+     * 
      */
     private $dateprise;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(message = "Date Retour can't be null")
+     * 
      */
     private $dateretour;
 
     /**
      * @ORM\Column(type="time")
+     * @Assert\NotBlank(message = "Heure can't be null")
+     * 
      */
     private $timeretour;
 

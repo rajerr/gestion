@@ -21,14 +21,13 @@ class PatientController extends AbstractController
     public function index(PatientRepository $patientrepos)
     {
         $patient = $patientrepos->findAll();
-        dd($patient);
         return $this->render('patient/index.html.twig', [
             'controller_name' => 'PatientController',
         ]);
     }
 
      /**
-     * @Route("/patient/create", name="createpatient")
+     * @Route("/patient/create", name="patient_create")
      */
     public function create(Request $request,SerializerInterface $serializer, ValidatorInterface $validator, EntityManagerInterface $manager)
     {
@@ -39,6 +38,7 @@ class PatientController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $patient = $form->getData();
+            dd($patient);
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
             $manager = $this->getDoctrine()->getManager();

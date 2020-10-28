@@ -2,9 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use App\Entity\Hopital;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -32,7 +34,12 @@ class HopitalType extends AbstractType
             ])
             // ->add('statut')
             ->add('ville')
-            // ->add('user')
+            ->add('user',EntityType::class,[
+                'class' => User::class,
+                'choice_label' =>function($user){
+                    return $user->getUsername();
+                }
+            ])
             ->add('Enregistrer', SubmitType::class)
         ;
     }

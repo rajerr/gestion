@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ConsultationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Webmozart\Assert\Assert;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ConsultationRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=ConsultationRepository::class)
@@ -21,31 +22,37 @@ class Consultation
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Libelle can't be null")
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="datetime")
+     * 
      */
     private $date;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message = "Poids can't be null")
      */
     private $poids;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message = "Temperature can't be null")
      */
     private $temperature;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Tension can't be null")
      */
     private $tension;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message = "Diagnostique can't be null")
      */
     private $diagnostique;
 

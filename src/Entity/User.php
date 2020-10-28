@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -26,6 +29,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message = "Username can't be null")
      * 
      */
     protected $username;
@@ -35,36 +39,46 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message = "password can't be null")
      */
     protected $password;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "nom can't be null")
      */
     protected $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "prenom can't be null")
      */
     protected $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Genre can't be null")
      */
     protected $genre;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Nationalité can't be null")
      */
     protected $nationalite;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message = "Telephone can't be null")
      */
     protected $telephone;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Email can't be null")
+     * @Assert\Email(
+     *  message = "Email '{{ value }}' is not valid!."
+     *)
      */
     protected $email;
 
@@ -81,6 +95,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="blob", nullable=true)
+     * @Assert\NotBlank(message = "avatar can't be null")
      */
     protected $avatar;
 

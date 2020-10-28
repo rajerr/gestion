@@ -57,6 +57,7 @@ Version      : 1.0
 -----------------------*/
 
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,500,700');
+@import "~bootstrap/scss/bootstrap";
 html {
 	height: 100%;
 }

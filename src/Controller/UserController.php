@@ -25,7 +25,7 @@ class UserController extends AbstractController
         ]);
     }
     /**
-     * @Route("/Admin/User/create", name="usercreate")
+     * @Route("/Admin/User/create", name="user_create")
      */
   
     public function createUser(Request $request, \Swift_Mailer $mailler, UserPasswordEncoderInterface $encoder, SerializerInterface $serializer, ValidatorInterface $validator, EntityManagerInterface $manager)
@@ -63,6 +63,12 @@ class UserController extends AbstractController
             );
 
             $mailler->send($message);
+            if($user->getProfile() == "PATIENT"){
+                return $this->render('patient/create.html.twig');
+            }
+            if($user->getProfile() == "MEDECIN"){
+                return $this->render('medecin/create.html.twig');
+            }
             return $this->render('user/verifie.html.twig');
             return $this->render('user/index.html.twig', [
                 'form' => $form->createView(),
@@ -70,6 +76,64 @@ class UserController extends AbstractController
             ]);
         }
         return $this->render('user/create.html.twig', [
+            'form' => $form->createView()
+        ]);
+        
+    }
+
+
+    /**
+     * @Route("/User/create", name="user_patient_create")
+     */
+  
+    public function createPatient(Request $request, \Swift_Mailer $mailler, UserPasswordEncoderInterface $encoder, SerializerInterface $serializer, ValidatorInterface $validator, EntityManagerInterface $manager)
+    {
+        
+        $user = new User();
+
+        $form = $this->createForm(UserType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+           
+            $user = $form->getData();
+            $password = $user->getPassword();
+            $user->setPassword($encoder->encodePassword($user, $password));
+            $user ->setStatut(0);
+            // ... perform some action, such as saving the task to the database
+            // for example, if Task is a Doctrine entity, save it!
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($user);
+            $manager->flush();
+
+            $message = (new \Swift_Message('Hello Email de validation'))
+            ->setFrom('rajerr2013@gmail.com')
+            ->setTo( $user->getEmail())
+            ->setBody(
+                $this->renderView(
+                    'user/mail.html.twig',
+                    ['id' => $user->getId(),
+                    'username' => $user->getUsername(),
+                    'password' => $password]
+                ),
+                'text/html'
+            );
+
+            $mailler->send($message);
+            if($user->getProfile() == "PATIENT"){
+                return $this->render('patient/create_user_patient.html.twig');
+            }
+            if($user->getProfile() == "MEDECIN"){
+                return $this->render('medecin/create.html.twig');
+            }
+            return $this->render('user/verifie.html.twig');
+            return $this->render('user/index.html.twig', [
+                'form' => $form->createView(),
+                'controller_name' => $user->getUsername()
+            ]);
+        }
+        return $this->render('user/create_user_patient.html.twig', [
             'form' => $form->createView()
         ]);
         

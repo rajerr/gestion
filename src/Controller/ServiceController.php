@@ -17,12 +17,12 @@ class ServiceController extends AbstractController
     /**
      * @Route("/service/index", name="service_index")
      * methods={"GET"},
+     * is_granted('ROLE_ADMIN')
      * 
      */
     public function getService(ServiceRepository $servicerepos)
     {
         $service = $servicerepos->findBy(['statut'=>true]);
-        dd($service);
         return $this->render('service/index.html.twig', [
             'controller_name' => 'ServiceController',
         ]);
@@ -31,6 +31,7 @@ class ServiceController extends AbstractController
 
 /**
      * @Route("/service/create", name="service_create")
+     * is_granted('ROLE_ADMIN')
      */
     public function createService(Request $request,SerializerInterface $serializer, ValidatorInterface $validator, EntityManagerInterface $manager)
     {

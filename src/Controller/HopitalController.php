@@ -18,6 +18,7 @@ class HopitalController extends AbstractController
     /**
      * @Route("/hopital/index", name="hopital_index")
      * methods={"GET"},
+     * is_granted('ROLE_ADMIN')
      */
     public function getHopital(HopitalRepository $hopitalrepos)
     {
@@ -31,9 +32,24 @@ class HopitalController extends AbstractController
         }
     }
 
+
+    /**
+     * @Route("/hopital/update", name="hopital_update")
+     * methods={"POST"},
+     * is_granted('ROLE_ADMIN')
+     */
+    public function updateHopital(HopitalRepository $hopitalrepos, $id)
+    {
+        $hopital = $hopitalrepos->findOneById($id);
+            return $this->render('hopital/update_hopital.html.twig', [
+                'controller_name' => 'HopitalController',
+            ]);
+    }
     
      /**
      * @Route("/hopital/create", name="hopital_create")
+     * methods={"POST"},
+     * is_granted('ROLE_ADMIN')
      */
     public function createHopital(Request $request,SerializerInterface $serializer, ValidatorInterface $validator, EntityManagerInterface $manager)
     {
@@ -49,8 +65,8 @@ class HopitalController extends AbstractController
             $hopital = $form->getData();
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
-            $user = $this->get('security.token_storage')->getToken()->getUser();
-            $hopital -> setUser($user);
+            // $user = $this->get('security.token_storage')->getToken()->getUser();
+            // $hopital -> setUser($user);
             $hopital -> setStatut(true);
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($hopital);
@@ -70,6 +86,7 @@ class HopitalController extends AbstractController
     /**
      * @Route("/hopital/index", name="hopital_user")
      * methods={"GET"},
+     * is_granted('ROLE_ADMIN')
      */
     public function getHopitalByUser(HopitalRepository $hopitalrepos, UserRepository $userrepos, $id)
     {

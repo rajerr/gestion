@@ -2,7 +2,7 @@
  * bootstrap-tagsinput v0.8.0
  * 
  */
-
+ @import "~bootstrap/scss/bootstrap";
 .bootstrap-tagsinput {
   background-color: #fff;
   border: 1px solid #ccc;

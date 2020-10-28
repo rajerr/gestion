@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\AnalyseRepository;
+use Webmozart\Assert\Assert;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AnalyseRepository;
 
 /**
  * @ORM\Entity(repositoryClass=AnalyseRepository::class)
@@ -19,11 +20,13 @@ class Analyse
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Libelle can't be null")
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message = "details can't be null")
      */
     private $details;
 
@@ -34,6 +37,7 @@ class Analyse
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(message = "date can't be null")
      */
     private $date;
 

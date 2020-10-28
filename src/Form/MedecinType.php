@@ -2,29 +2,28 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use App\Entity\Medecin;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class MedecinType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('roles')
-            ->add('password')
-            ->add('nom')
-            ->add('prenom')
-            ->add('genre')
-            ->add('nationalite')
-            ->add('telephone')
-            ->add('email')
-            ->add('statut')
-            ->add('avatar')
+        ->add('id',EntityType::class,[
+            'class' => User::class,
+            'choice_label' =>function($user){
+                return $user->getUsername();
+            }
+        ])
             ->add('specialite')
-            ->add('profile')
+            ->add('biographie')
+            ->add('Enregistrer', SubmitType::class)
         ;
     }
 

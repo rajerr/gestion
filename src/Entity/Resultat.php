@@ -19,11 +19,14 @@ class Resultat
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message = "Observation can't be null")
+     * 
      */
     private $observation;
 
     /**
      * @ORM\Column(type="blob")
+     * 
      */
     private $fichier;
 
