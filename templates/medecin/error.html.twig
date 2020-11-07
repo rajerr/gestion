@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Suivi{% endblock %}
+
+{% block body %}
+        {% include "menu.html.twig" %}
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-4 col-3">
+                <h4 class="page-title">Medecin</h4>
+            </div>
+            <div class="col-sm-8 col-9 text-right m-b-20">
+                <a href="{{path('medecin_create')}}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Ajouter Medecin</a>
+            </div>
+        </div>
+    </div>
+
+        <h1 class="text-center text-color-info">Pas de données</h1>
+</div>
+{% endblock %}

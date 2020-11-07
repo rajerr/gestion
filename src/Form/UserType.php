@@ -10,6 +10,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class UserType extends AbstractType
@@ -18,7 +20,12 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('password')
+            ->add('password', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'invalid_message' => 'password non identique.',
+                'first_name' => 'password',
+                'second_name' => 'confirmer',
+              ))
             ->add('nom')
             ->add('prenom')
             ->add('genre', ChoiceType::class, [

@@ -47,4 +47,23 @@ class HopitalServiceRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+
+    // /**
+    //  * @return HopitalService[] Returns an array of HopitalService objects
+    //  */
+    /*
+    public function findByHopital($value)
+    {
+        return $this->createQueryBuilder('h')
+            ->andWhere('h.hopital = :val')
+            ->setParameter('val', $value)
+            ->orderBy('h.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
 }

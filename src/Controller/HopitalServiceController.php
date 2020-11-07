@@ -6,6 +6,7 @@ use App\Entity\HopitalService;
 use App\Form\HopitalServiceType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\HopitalServiceRepository;
+use App\Repository\HopitalRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -21,13 +22,26 @@ class HopitalServiceController extends AbstractController
      * "security_message"="vous n'avez pas le droit pour faire cette action.",
      * 
      */
-    public function getHopitalToService(HopitalServiceRepository $repos)
+    public function getHopitalToService(HopitalServiceRepository $repos, HopitalRepository $hopitalrepos)
     {
+        $hopitalervices = $repos->findByHopital(['statut'=>true]);
+        $user = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        $hopital = $hopitalrepos->findByUser($user);
 
-        $service = $repos->findAll();
-        return $this->render('hopital_service/index.html.twig', [
+        // dd($hopital);
+        foreach ($hopitalervices as $s) {
+            foreach($hopital as $h){
+                if($s->getHopital()->getId() == $h->getId()){
+                     return $this->render('hopital_service/index.html.twig', 
+                     compact('hopitalervices')
+                 );  
+                }
+            }
+        }
+        return $this->render('service/error.html.twig', [
             'controller_name' => 'HopitalServiceController',
         ]);
+
     }
 
 
@@ -56,6 +70,7 @@ class HopitalServiceController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($hopitalService);
             $manager->flush();
+            return $this->render('succes.html.twig');
             return $this->render('hopital_service/index.html.twig', [
                 'form' => $form->createView(),
                 'controller_name' => $hopitalService->getId()

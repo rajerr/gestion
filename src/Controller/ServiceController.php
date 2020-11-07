@@ -22,10 +22,9 @@ class ServiceController extends AbstractController
      */
     public function getService(ServiceRepository $servicerepos)
     {
-        $service = $servicerepos->findBy(['statut'=>true]);
-        return $this->render('service/index.html.twig', [
-            'controller_name' => 'ServiceController',
-        ]);
+        $services = $servicerepos->findBy(['statut'=>true]);
+        return $this->render('service/index.html.twig',
+                      compact('services'));
     }
 
 
@@ -51,6 +50,7 @@ class ServiceController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($service);
             $manager->flush();
+            return $this->render('succes.html.twig');
             return $this->render('service/index.html.twig', [
                 'form' => $form->createView(),
                 'controller_name' => $service->getNom()

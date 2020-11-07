@@ -45,6 +45,7 @@ class AnalyseController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($analyse);
             $manager->flush();
+            return $this->render('succes.html.twig');
             return $this->render('analyse/index.html.twig', [
                 'controller_name' => 'analyseController'
             ]);

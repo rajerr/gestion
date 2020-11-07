@@ -46,6 +46,7 @@ class ResultatController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($resultat);
             $manager->flush();
+            return $this->render('succes.html.twig');
             return $this->render('resultat/index.html.twig', [
                 'controller_name' => 'resultatController'
             ]);

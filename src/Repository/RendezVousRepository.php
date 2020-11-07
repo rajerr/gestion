@@ -47,4 +47,22 @@ class RendezVousRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    // /**
+    //  * @return RendezVous[] Returns an array of RendezVous objects
+    //  */
+    /*
+    public function findByPatient($value)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.epatient = :val')
+            ->setParameter('val', $value)
+            ->orderBy('r.id', 'DSC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
 }

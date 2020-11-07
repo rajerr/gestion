@@ -18,18 +18,14 @@ class HopitalController extends AbstractController
     /**
      * @Route("/hopital/index", name="hopital_index")
      * methods={"GET"},
-     * is_granted('ROLE_ADMIN')
+     * is_granted('ROLE_ADMIN') or is_granted('ROLE_SOUSADMIN') or is_granted('ROLE_PATIENT')
      */
     public function getHopital(HopitalRepository $hopitalrepos)
     {
-        $hopital = $hopitalrepos->findBy(['statut'=>true]);
-        foreach($hopital as $key=>$value){
-            $hopital = ["key"=>"value"];
-
-            return $this->render('hopital/index.html.twig', [
-                'controller_name' => 'HopitalController',
-            ]);
-        }
+        
+        $hopitals = $hopitalrepos->findBy(['statut'=>true]);
+        //dd($hopitals[1]->getUser()->getNom());
+            return $this->render('hopital/index.html.twig', ['hopitals'=>$hopitals]);
     }
 
 
@@ -53,7 +49,6 @@ class HopitalController extends AbstractController
      */
     public function createHopital(Request $request,SerializerInterface $serializer, ValidatorInterface $validator, EntityManagerInterface $manager)
     {
-        
         $hopital = new Hopital();
 
         $form = $this->createForm(HopitalType::class, $hopital);
@@ -71,9 +66,9 @@ class HopitalController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($hopital);
             $manager->flush();
+            return $this->render('succes.html.twig');
             return $this->render('hopital/index.html.twig', [
-                'form' => $form->createView(),
-                'controller_name' => $hopital->getNom()
+                'form' => $form->createView()
             ]);
         }
         return $this->render('hopital/create_hopital.html.twig', [

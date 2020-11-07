@@ -1,19 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}Details info{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
+        {% include "menu.html.twig" %}
 <div class="example-wrapper">
-    <h1>Enregistrement avec succès ✅</h1>
-    <h3>veuillez consultez votre mail pour activer votre compte.</h3>
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/rajerr/Projects/Gestion/src/Controller/UserController.php'|file_link(0) }}">src/Controller/UserController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/rajerr/Projects/Gestion/templates/user/index.html.twig'|file_link(0) }}">templates/user/index.html.twig</a></code></li>
-    </ul>
+    <div class="content">
+		<div class="col-sm-8 col-9 text-center m-b-20">
+            <h1 >Enregistrement avec succès ✅</h1>
+            <h1>Enregistrement avec succès ✅</h1>
+            <h3>Un email de confirmation a été envoyé</h3>
+            <h3>veuillez consulter votre mail pour activer votre compte.</h3>
+            <ul>
+                
+            </ul>
+        </div>
+    </div>
 </div>
 {% endblock %}

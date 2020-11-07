@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\SuiviRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=SuiviRepository::class)
@@ -26,8 +28,8 @@ class Suivi
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\NotBlank(message = "Date Prise can't be null")
-     * 
+     * @Assert\DateTime
+     * @var string A "Y-m-d H:i:s" formatted value
      */
     private $dateprise;
 
@@ -49,6 +51,11 @@ class Suivi
      * @ORM\ManyToOne(targetEntity=Consultation::class, inversedBy="suivis")
      */
     private $consultation;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $etat;
 
     public function getId(): ?int
     {
@@ -111,6 +118,18 @@ class Suivi
     public function setConsultation(?Consultation $consultation): self
     {
         $this->consultation = $consultation;
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?string $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

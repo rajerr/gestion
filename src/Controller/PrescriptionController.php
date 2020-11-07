@@ -25,6 +25,16 @@ class PrescriptionController extends AbstractController
     }
 
 
+        /**
+     * @Route("/prescription/index", name="prescription_patient")
+     */
+    public function getPrescriptionPatient()
+    {
+        return $this->render('prescription/index.html.twig', [
+            'controller_name' => 'PrescriptionController',
+        ]);
+    }
+
 
 
      /**
@@ -48,6 +58,7 @@ class PrescriptionController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($prescription);
             $manager->flush();
+            return $this->render('succes.html.twig');
             return $this->render('prescription/index.html.twig', [
                 'controller_name' => 'prescriptionController'
             ]);

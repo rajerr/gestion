@@ -16,9 +16,11 @@ class MedecinType extends AbstractType
     {
         $builder
         ->add('id',EntityType::class,[
+            'data_class' => null,
+            'mapped' => false, 
             'class' => User::class,
             'choice_label' =>function($user){
-                return $user->getUsername();
+                return $user->getUsername()." ".$user->getProfile()->getLibelle();
             }
         ])
             ->add('specialite')

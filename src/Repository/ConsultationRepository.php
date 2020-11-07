@@ -47,4 +47,43 @@ class ConsultationRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+
+
+
+    // /**
+    //  * @return Consultation[] Returns an array of Consultation objects
+    //  */
+    /*
+    public function findByPatient($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.patient = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
+
+
+    // /**
+    //  * @return Consultation[] Returns an array of Consultation objects
+    //  */
+    /*
+    public function findByMedecin($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.medecin = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
 }

@@ -20,10 +20,11 @@ class PatientController extends AbstractController
      */
     public function index(PatientRepository $patientrepos)
     {
-        $patient = $patientrepos->findAll();
-        return $this->render('patient/index.html.twig', [
-            'controller_name' => 'PatientController',
-        ]);
+        $patients = $patientrepos->findAll();
+        // dd($patients);
+        return $this->render('patient/index.html.twig', 
+                    compact('patients')
+        );
     }
 
      /**
@@ -44,7 +45,7 @@ class PatientController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($patient);
             $manager->flush();
-
+            // return $this->render('succes.html.twig');
             return $this->render('patient/index.html.twig', [
                 'form' => $form->createView(),
                 'controller_name' => $patient->getUsername()

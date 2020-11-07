@@ -17,4 +17,16 @@ class AccueilController extends AbstractController
             'controller_name' => 'AccueilController',
         ]);
     }
+
+    /**
+     * @Route("/menu", name="name_menu")
+     */
+    public function menu()
+    {
+        return $this->render('menu.html.twig', [
+            'controller_name' => 'AccueilController',
+        ]);
+    }
+
+
 }

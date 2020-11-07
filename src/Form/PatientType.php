@@ -20,7 +20,7 @@ class PatientType extends AbstractType
             ->add('id',EntityType::class,[
                 'class' => User::class,
                 'choice_label' =>function($user){
-                    return $user->getUsername();
+                    return $user->getUsername()."   ".$user->getProfile()->getLibelle();
                 }
             ])
             ->add('groupeSanguin', ChoiceType::class, [

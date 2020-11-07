@@ -9,6 +9,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class SuiviType extends AbstractType
 {
@@ -24,6 +26,16 @@ class SuiviType extends AbstractType
                 'choice_label' =>function($consultation){
                     return $consultation->getLibelle();
                 }
+            ])
+            ->add('etat', ChoiceType::class, [
+                'choices' => [
+                    'Genre' => [
+                        'selectionnez' => '',
+                        'ENCOURS' => 'ENCOURS',
+                        'MANQUER' => 'MANQUER',
+                        'TERMINER' => 'TERMINER',
+                    ],
+                ],
             ])
             ->add('Enregistrer', SubmitType::class)
         ;

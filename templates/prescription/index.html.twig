@@ -1,20 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PrescriptionController!{% endblock %}
+{% block title %}Prescriptions{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/rajerr/Projects/Gestion/src/Controller/PrescriptionController.php'|file_link(0) }}">src/Controller/PrescriptionController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/rajerr/Projects/Gestion/templates/prescription/index.html.twig'|file_link(0) }}">templates/prescription/index.html.twig</a></code></li>
-    </ul>
+        {% include "menu.html.twig" %}
+<div class="page-wrapper">
+    <div class="content">
+		<div class="row">
+			<div class="col-sm-4 col-3">
+				<h4 class="page-title">Prescriptions</h4>
+			</div>
+			<div class="col-sm-8 col-9 text-right m-b-20">
+				<a href="{{path('analyse_index')}}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Analyses</a>
+				<a href="{{path('resultat_index')}}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i>Resultats</a>
+				<a href="{{path('ordonnance_index')}}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Ordonnances</a>
+            {% if is_granted('ROLE_MEDECIN') %}
+                <a href="{{path('prescription_create')}}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Ajouter Prescription</a>
+			{% endif %}
+			</div>
+		</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="table-responsive">
+					<table class="table table-border table-striped custom-table mb-0">
+						<thead>
+							<tr>
+								<th>Consultations</th>
+								<th>Libelle</th>
+								<th>Details</th>
+								<th>Date</th>
+								<th class="text-right">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>prescription demangeaison</td>
+								<td>sell</td>
+								<td>ddhugjhik yhujiko rtgyhujik fgcvhbjnk n</td>
+								<td>2020-10-14 01:33:14</td>
+								<td class="text-right">
+									<div class="dropdown dropdown-action">
+										<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+										<div class="dropdown-menu dropdown-menu-right">
+											<a class="dropdown-item" href="{{asset('hopital_update')}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+											<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_schedule"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+		</div>
+	</div>
 </div>
 {% endblock %}

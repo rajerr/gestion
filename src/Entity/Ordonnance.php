@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use Webmozart\Assert\Assert;
+
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OrdonnanceRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=OrdonnanceRepository::class)

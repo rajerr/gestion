@@ -11,6 +11,7 @@
             <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
             <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
             <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
         {% endblock %}
          <!--[if lt IE 9]>
           <script src="{{ asset('js/html5shiv.min.js') }}"></script>
@@ -20,7 +21,6 @@
     </head>
     <body>
         {% block body %}
-            
         {% endblock %}
         {% block javascripts %}
                 <div class="sidebar-overlay" data-reff=""></div>
@@ -31,6 +31,7 @@
                 <script src="{{ asset('js/Chart.bundle.js') }}"></script>
                 <script src="{{ asset('js/chart.js') }}"></script>
                 <script src="{{ asset('js/app.js') }}"></script>
+                <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
         {% endblock %}
     </body>
 </html>

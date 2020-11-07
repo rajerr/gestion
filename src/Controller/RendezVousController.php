@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\RendezVous;
 use App\Form\RendezVousType;
 use App\Repository\HopitalRepository;
+use App\Repository\PatientRepository;
 use App\Repository\RendezVousRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,12 +17,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class RendezVousController extends AbstractController
 {
     /**
-     * @Route("/rendezvous/index", name="rendez_vous")
+     * @Route("/rendezvous/index", name="rendez_vous_medecin")
      */
     public function getRendezVous(RendezVousRepository $rdvrepos)
     {
         $rdv = $rdvrepos->findBy(['etat'=>'encours']);
-        dd($rdv);
+        // dd($rdv);
         return $this->render('rendez_vous/index.html.twig', [
             'controller_name' => 'RendezVousController',
         ]);
@@ -29,22 +30,40 @@ class RendezVousController extends AbstractController
 
 
        /**
-     * @Route("rendezvous/index", name="rendez_vous")
+     * @Route("rendezvous/index", name="rendez_vous_hopital")
      */
     public function getRendezVousByHopital(RendezVousRepository $rdvrepos, HopitalRepository $hopitalrepos, $id)
     {
         $hopital = $hopitalrepos->find($id);
         $rdv = $rdvrepos->findBy(['etat'=>'encours']);
-        dd($hopital);
+        // dd($hopital);
         return $this->render('rendez_vous/index.html.twig', [
             'controller_name' => 'RendezVousController',
         ]);
     }
 
 
+    /**
+     * @Route("/patient/rendezvous", name="rendez_vous_patient")
+     */
+    public function getRendezVousByPatient(RendezVousRepository $rdvrepos, PatientRepository $patientrepos)
+    {
+        $patients = $patientrepos->findBy(['statut'=>true]);
+        $user = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        $rendezVouses = $rdvrepos->findByUser($user);
+        // dd($rendezVouses);
+        foreach($rendezVouses as $rdv){
+            if($user == $rdv->getUser()->getId()){
+                return $this->render('rendez_vous/index.html.twig', compact('rendezVouses'));
+            }
+        }
+        return $this->render('error.html.twig');
+    }
+
+
 
      /**
-     * @Route("/rendezvous/create", name="rendezvous")
+     * @Route("/rendezvous/create", name="rendez_vous_create")
      */
     public function createRendezVous(Request $request,SerializerInterface $serializer, ValidatorInterface $validator, EntityManagerInterface $manager)
     {
@@ -66,6 +85,7 @@ class RendezVousController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($rendezvous);
             $manager->flush();
+            return $this->render('succes.html.twig');
             return $this->render('rendez_vous/index.html.twig', [
                 'form' => $form->createView(),
                 'controller_name' => $rendezvous->getLibelle()

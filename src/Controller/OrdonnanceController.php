@@ -47,6 +47,7 @@ class OrdonnanceController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($ordonnance);
             $manager->flush();
+            return $this->render('succes.html.twig');
             return $this->render('ordonnance/index.html.twig', [
                 'controller_name' => 'ordonnanceController'
             ]);
